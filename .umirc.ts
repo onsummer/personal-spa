@@ -12,4 +12,8 @@ export default defineConfig({
   dynamicImport: {},
   /** 启用 webpack5 */
   webpack5: {},
+  /** 启用 esbuild */
+  // esbuild: {}
+  /** 不使用 antdesign */
+  // antd: false
 })

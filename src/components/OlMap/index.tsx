@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { useDispatch } from 'umi'
+import { GISEngineType, useDispatch } from 'umi'
 import { Map, View } from 'ol'
 import { Tile as TileLayer } from 'ol/layer'
 import { OSM as OSMSource } from 'ol/source'
@@ -9,12 +9,17 @@ import styles from './index.less'
 
 export default (props: any) => {
   const olDivContainerRef = useRef<HTMLDivElement>(null)
+  const dispatch = useDispatch()
+
   let map: Map
   useEffect(() => {
     map = new Map({
       layers: [
         new TileLayer({
-          source: new OSMSource()
+          source: new OSMSource({
+            attributions: null
+          }),
+          opacity: 0.9
         })
       ],
       target: olDivContainerRef.current as HTMLElement,
@@ -22,6 +27,14 @@ export default (props: any) => {
         center: fromLonLat([110.1536, 22.6307]),
         zoom: 13
       })
+    })
+
+    dispatch({
+      type: 'system/save',
+      payload: {
+        currentEngine: GISEngineType.Openlayers,
+        map: map
+      }
     })
   }, [])
 

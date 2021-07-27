@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import styles from './index.less'
-import OlMap from '@/components/OlMap'
+import OlMap from '@/components/OlMap/async'
+import StatusBar from '@/components/StatusBar'
 
 export default (props: any) => {
   const { match } = props
@@ -13,5 +14,6 @@ export default (props: any) => {
 
   return <div className={styles.olRoute}>
     <OlMap></OlMap>
+    <StatusBar></StatusBar>
   </div>
 }

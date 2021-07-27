@@ -1,13 +1,16 @@
+import { Map } from 'ol'
 import { Effect, Reducer } from 'umi'
 
 export enum GISEngineType {
   Mapbox,
+  Openlayers,
   Cesium,
   NotLoaded
 }
 
 export interface SystemModelState {
-  currentEngine: GISEngineType
+  currentEngine: GISEngineType,
+  map?: Map
 }
 
 export interface SystemModelAction {
@@ -29,7 +32,8 @@ export interface SystemModelType {
 const SystemModel: SystemModelType = {
   namespace: 'system',
   state: {
-    currentEngine: GISEngineType.NotLoaded
+    currentEngine: GISEngineType.NotLoaded,
+    map: undefined
   },
   effects: {
 
