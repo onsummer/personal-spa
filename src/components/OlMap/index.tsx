@@ -17,7 +17,7 @@ export default (props: any) => {
       layers: [
         new TileLayer({
           source: new OSMSource({
-            attributions: null
+            attributions: ""
           }),
           opacity: 0.9
         })
