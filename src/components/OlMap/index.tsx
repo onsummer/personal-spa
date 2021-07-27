@@ -17,7 +17,7 @@ export default (props: any) => {
       layers: [
         new TileLayer({
           source: new OSMSource({
-            attributions: ""
+            attributions: ''
           }),
           opacity: 0.9
         })
@@ -33,11 +33,11 @@ export default (props: any) => {
       type: 'system/save',
       payload: {
         currentEngine: GISEngineType.Openlayers,
-        map: map
+        map: map,
+        isMapInit: true
       }
     })
   }, [])
 
-  return <div ref={olDivContainerRef} className={styles.olMapContainer}>
-  </div>
+  return <div ref={olDivContainerRef} className={styles.olMapContainer}></div>
 }

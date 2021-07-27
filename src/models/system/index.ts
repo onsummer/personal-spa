@@ -9,21 +9,22 @@ export enum GISEngineType {
 }
 
 export interface SystemModelState {
-  currentEngine: GISEngineType,
+  currentEngine: GISEngineType
   map?: Map
+  isMapInit: boolean
 }
 
 export interface SystemModelAction {
-  type: string,
+  type: string
   payload: any
 }
 
 export interface SystemModelType {
-  namespace: string,
-  state: SystemModelState,
+  namespace: string
+  state: SystemModelState
   effects: {
     [key: string]: Effect
-  },
+  }
   reducers: {
     save: Reducer<SystemModelState, SystemModelAction>
   }
@@ -33,11 +34,10 @@ const SystemModel: SystemModelType = {
   namespace: 'system',
   state: {
     currentEngine: GISEngineType.NotLoaded,
-    map: undefined
+    map: undefined,
+    isMapInit: false
   },
-  effects: {
-
-  },
+  effects: {},
   reducers: {
     save(state, action) {
       return {
