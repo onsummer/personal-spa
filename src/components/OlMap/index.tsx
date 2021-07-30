@@ -1,26 +1,31 @@
 import { useState, useEffect, useRef } from 'react'
-import { GISEngineType, useDispatch } from 'umi'
+import { GISEngineType, useDispatch, useSelector } from 'umi'
 import { Map, View } from 'ol'
 import { Tile as TileLayer } from 'ol/layer'
-import { OSM as OSMSource } from 'ol/source'
+import { OSM as OSMSource, Vector as VectorSource } from 'ol/source'
 import { fromLonLat } from 'ol/proj'
+
+import { DefaultRootState } from '@/typings'
+import { addGeoJsonLayer } from './postinit/addGeoJsonLayer'
+
 import 'ol/ol.css'
 import styles from './index.less'
 
 export default (props: any) => {
   const olDivContainerRef = useRef<HTMLDivElement>(null)
   const dispatch = useDispatch()
+  const { map, isMapInit } = useSelector((state: DefaultRootState) => state.system)
 
-  let map: Map
+  // let map: Map
   useEffect(() => {
-    map = new Map({
+    const _map = new Map({
       layers: [
-        new TileLayer({
-          source: new OSMSource({
-            attributions: ''
-          }),
-          opacity: 0.9
-        })
+        // new TileLayer({
+        //   source: new OSMSource({
+        //     attributions: ''
+        //   }),
+        //   opacity: 0.9
+        // })
       ],
       target: olDivContainerRef.current as HTMLElement,
       view: new View({
@@ -33,11 +38,17 @@ export default (props: any) => {
       type: 'system/save',
       payload: {
         currentEngine: GISEngineType.Openlayers,
-        map: map,
+        map: _map,
         isMapInit: true
       }
     })
   }, [])
+
+  useEffect(() => {
+    if (map && isMapInit) {
+      addGeoJsonLayer(map)
+    }
+  }, [map, isMapInit])
 
   return <div ref={olDivContainerRef} className={styles.olMapContainer}></div>
 }
