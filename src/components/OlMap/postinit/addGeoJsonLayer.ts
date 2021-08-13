@@ -5,7 +5,7 @@ import { GeoJSON } from 'ol/format'
 import { Style, Fill, Stroke } from "ol/style"
 
 export const addGeoJsonLayer = async (map: Map) => {
-  const chinafullResp = await fetch('/static/china_full.json')
+  const chinafullResp = await fetch('/cdnstatic/china_full.json')
   const chinafull = await chinafullResp.json()
   const vectorSource = new VectorSource({
     features: new GeoJSON({

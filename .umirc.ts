@@ -21,8 +21,12 @@ export default defineConfig({
   proxy: {
     '/static': {
       // 例如，请求 /static/data.json 实际上是请求了 https://aiyoo.asia/static/data.json
-      'target': 'https://aiyoo.asia/',
-      'changeOrigin': true
+      target: 'https://aiyoo.asia/',
+      changeOrigin: true
+    },
+    '/cdnstatic': {
+      target: 'https://aiyoo.asia/',
+      changeOrigin: true
     }
   },
   devServer: {
